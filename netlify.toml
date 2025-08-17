@@ -1,4 +1,4 @@
 [build]
   publish = "public"
+  command = "echo Skipping build"   # <— force Netlify to skip build
   functions = "netlify/functions"
-  command = ""   # 🚨 No build step (important!)
