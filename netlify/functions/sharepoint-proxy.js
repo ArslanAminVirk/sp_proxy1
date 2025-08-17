@@ -15,7 +15,7 @@ exports.handler = async (event) => {
   }
 
   const SHAREPOINT_URL =
-    "https://taqwamd.sharepoint.com/sites/.../gravelist.json?download=1";
+    "https://taqwamd.sharepoint.com/:u:/g/Ee_hH6MgsThDptAh7Oz4R5kBo0puWT3PSeB38g-CJ8d5XA?e=kMg4zk";
 
   try {
     const resp = await fetch(SHAREPOINT_URL, {
