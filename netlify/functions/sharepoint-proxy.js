@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   }
 
   // Base SharePoint link (client can give any link)
-  let SHAREPOINT_URL = "https://taqwamd.sharepoint.com/:u:/g/Ee_hH6MgsThDptAh7Oz4R5kBo0puWT3PSeB38g-CJ8d5XA?e=kMg4zk";
+  let SHAREPOINT_URL = "https://taqwamd.sharepoint.com/_layouts/15/download.aspx?UniqueId=a31fe1efb1204338a6d021ececf84799&e=CENo1f";
 
   // 👉 Ensure it always has &download=1
   if (!SHAREPOINT_URL.includes("download=1")) {
