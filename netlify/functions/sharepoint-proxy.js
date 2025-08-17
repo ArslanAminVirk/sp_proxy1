@@ -1,5 +1,6 @@
 // netlify/functions/sharepoint-proxy.js
-// CommonJS style (safest on Netlify)
+const fetch = require("node-fetch");   // 👈 add this
+
 exports.handler = async (event) => {
   // Handle preflight if any
   if (event.httpMethod === "OPTIONS") {
@@ -17,7 +18,9 @@ exports.handler = async (event) => {
     "https://taqwamd.sharepoint.com/_layouts/15/download.aspx?SourceUrl=%2FGraveSites%2Fjson_files%2Fgravelist.json";
 
   try {
-    const resp = await fetch(SHAREPOINT_URL, { headers: { "User-Agent": "Mozilla/5.0" } });
+    const resp = await fetch(SHAREPOINT_URL, {
+      headers: { "User-Agent": "Mozilla/5.0" }
+    });
     const text = await resp.text();
 
     if (!resp.ok) {
@@ -30,9 +33,9 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: text, // JSON string
+      body: text,
       headers: {
-        "Access-Control-Allow-Origin": "*",   // ✅ CORS fixed
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,OPTIONS",
         "Content-Type": "application/json",
         "Cache-Control": "no-store"
