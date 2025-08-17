@@ -1,7 +1,7 @@
 {
-  "name": "sharepoint-proxy1",
+  "name": "sp_proxy1",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo \"No build step\""
+    "start": "echo 'No build step needed'"
   }
 }
