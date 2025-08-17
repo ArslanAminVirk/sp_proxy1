@@ -1,7 +1,8 @@
 {
   "name": "sp_proxy1",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "start": "echo 'No build step needed'"
+    "start": "echo 'no build step'"
   }
 }
