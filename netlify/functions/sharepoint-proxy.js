@@ -1,8 +1,7 @@
 // netlify/functions/sharepoint-proxy.js
-const fetch = require("node-fetch");   // 👈 add this
+const fetch = require("node-fetch");
 
 exports.handler = async (event) => {
-  // Handle preflight if any
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 204,
@@ -14,20 +13,29 @@ exports.handler = async (event) => {
     };
   }
 
-const SHAREPOINT_URL =
-  "https://taqwamd.sharepoint.com/:u:/g/Ee_hH6MgsThDptAh7Oz4R5kBo0puWT3PSeB38g-CJ8d5XA?e=kMg4zk&download=1";
+  // Base SharePoint link (client can give any link)
+  let SHAREPOINT_URL = "https://taqwamd.sharepoint.com/:u:/g/Ee_hH6MgsThDptAh7Oz4R5kBo0puWT3PSeB38g-CJ8d5XA?e=kMg4zk";
+
+  // 👉 Ensure it always has &download=1
+  if (!SHAREPOINT_URL.includes("download=1")) {
+    SHAREPOINT_URL += (SHAREPOINT_URL.includes("?") ? "&" : "?") + "download=1";
+  }
 
   try {
     const resp = await fetch(SHAREPOINT_URL, {
       headers: { "User-Agent": "Mozilla/5.0" }
     });
+
     const text = await resp.text();
 
     if (!resp.ok) {
       return {
         statusCode: resp.status,
         body: `Upstream error: ${resp.statusText}\n` + text.slice(0, 400),
-        headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "text/plain" }
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "text/plain"
+        }
       };
     }
 
